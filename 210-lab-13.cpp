@@ -49,8 +49,7 @@ int main() {
 
     fout.close();
 
-    cout << "sorted result written to output file" << endl;
-
+    cout << "Sorted results written to 210-lab-13-grades-sorted.txt" << endl;
 
     int minIndex = 0;
     int maxIndex = 0;
@@ -72,15 +71,13 @@ int main() {
     mean = total/i;
 
     cout << endl;
-    cout << "Statistics" << endl;
-    cout << "----------" << endl;
+    cout << "--- Summary Statistics ---" << endl;
 
+    cout << "Minimum Score: " << students[minIndex].score << " (Student ID: " << students[minIndex].id << ")" << endl;
 
-    cout << "Minimum: " << students[minIndex].score << " for ID: " << students[minIndex].id << endl;
+    cout << "Maximum Score: " << students[maxIndex].score << " (Student ID: " << students[maxIndex].id << ")" << endl;
 
-    cout << "Maximum: " << students[maxIndex].score << " for ID: " << students[maxIndex].id << endl;
-
-    cout << "Mean: " << mean << endl;
+    cout << "Mean Score: " << mean << endl;
 
     // make a copy so we can sort by score without changing students
     Student byScore[150];
@@ -98,8 +95,7 @@ int main() {
     median = (byScore[(i/2) - 1].score + byScore[(i/2)].score) / 2;
     medianId = byScore[(i/2)].id;
 
-    cout << "Median: " << median << " for ID: " << medianId << endl;
-
+    cout << "Median Score: " << median << " (Student ID: " << medianId << ")" << endl;
     // standard deviation
     double sumSquares = 0;
     double stdDev;
