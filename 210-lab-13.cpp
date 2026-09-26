@@ -31,12 +31,6 @@ int main() {
     //read from file and put into struct and then into array 
     if (fin.good()) {
         while (fin >> s.id >> s.score) {
-
-            cout << i << endl;
-            cout << s.id << endl;
-            cout << s.score << endl;
-
-
             students[i] = s;
             i++;
         }
