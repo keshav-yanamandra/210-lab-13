@@ -8,6 +8,8 @@
 
 using namespace std;
 
+const int SIZE = 150;
+
 // stores one student id and exam score which is in the input file
 struct Student {
     int id;
@@ -18,7 +20,7 @@ void selectionSortById(Student[], int);
 void selectionSortByScore(Student[], int);
 
 int main() {
-    Student students[150];
+    Student students[SIZE];
 
     ifstream fin;
     Student s;
@@ -35,8 +37,22 @@ int main() {
             i++;
         }
 
+        cout << "Read " << i << " student records" << endl;
         fin.close();
     }
+    else {
+        cout << "File not read" << endl;
+
+        return 1;
+    }
+
+    // make a copy so we can sort by score without changing students
+    Student byScore[SIZE];
+
+    for (int j = 0; j < i; j++) {
+        byScore[j] = students[j];
+    }
+
     selectionSortById(students, i);
 
     //write output to file
@@ -79,12 +95,6 @@ int main() {
 
     cout << "Mean Score: " << mean << endl;
 
-    // make a copy so we can sort by score without changing students
-    Student byScore[150];
-
-    for (int j = 0; j < i; j++) {
-        byScore[j] = students[j];
-    }
 
     selectionSortByScore(byScore, i);
 
@@ -92,8 +102,8 @@ int main() {
     double median;
     int medianId;
 
-    median = (byScore[(i/2) - 1].score + byScore[(i/2)].score) / 2;
-    medianId = byScore[(i/2)].id;
+    median = (byScore[i / 2 - 1].score + byScore[i / 2].score) / 2;
+    medianId = byScore[i / 2].id;
 
     cout << "Median Score: " << median << " (Student ID: " << medianId << ")" << endl;
     // standard deviation
