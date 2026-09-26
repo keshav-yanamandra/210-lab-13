@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 
@@ -77,15 +78,48 @@ int main() {
     mean = total/i;
 
     cout << endl;
-cout << "Statistics" << endl;
-cout << "----------" << endl;
+    cout << "Statistics" << endl;
+    cout << "----------" << endl;
 
 
-cout << "Minimum: " << students[minIndex].score << " for ID: " << students[minIndex].id << endl;
+    cout << "Minimum: " << students[minIndex].score << " for ID: " << students[minIndex].id << endl;
 
-cout << "Maximum: " << students[maxIndex].score << " for ID: " << students[maxIndex].id << endl;
+    cout << "Maximum: " << students[maxIndex].score << " for ID: " << students[maxIndex].id << endl;
 
-cout << "Mean: " << mean << endl;
+    cout << "Mean: " << mean << endl;
+
+    // make a copy so we can sort by score without changing students
+    Student byScore[150];
+
+    for (int j = 0; j < i; j++) {
+        byScore[j] = students[j];
+    }
+
+    selectionSortByScore(byScore, i);
+
+    // median
+    double median;
+    int medianId;
+
+    median = (byScore[(i/2) - 1].score + byScore[(i/2)].score) / 2;
+    medianId = byScore[(i/2)].id;
+
+    cout << "Median: " << median << " for ID: " << medianId << endl;
+
+    // standard deviation
+    double sumSquares = 0;
+    double stdDev;
+
+    for (int j = 0; j < i; j++) {
+        sumSquares = sumSquares + (students[j].score - mean) * (students[j].score - mean);
+    }
+
+    stdDev = sqrt(sumSquares / i);
+
+    cout << "Standard Deviation: " << stdDev << endl;
+
+    cout << endl;
+
 
     return 0;
 }
@@ -107,3 +141,21 @@ void selectionSortById(Student arr[], int count) {
         arr[indexSmallest] = temp;
     }
 }
+
+    void selectionSortByScore(Student arr[], int count) {
+        
+        for (int i = 0; i < count - 1; i++) {
+            int indexSmallest = i;
+
+            for (int j = i + 1; j < count; j++) {
+                if (arr[j].score < arr[indexSmallest].score) {
+                    indexSmallest = j;
+                }
+            }
+
+            Student temp = arr[i];
+
+            arr[i] = arr[indexSmallest];
+            arr[indexSmallest] = temp;
+        }
+    }
