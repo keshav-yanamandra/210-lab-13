@@ -13,6 +13,24 @@ struct Student {
     double score;
 };
 
+void selectionSortById(Student arr[], int count) {
+    for (int i = 0; i < count - 1; i++) {
+        int indexSmallest = i;
+
+        for (int j = i + 1; j < count; j++) {
+            
+            if (arr[j].id < arr[indexSmallest].id) {
+                indexSmallest = j;
+            }
+        }
+
+        Student temp = arr[i];
+
+        arr[i] = arr[indexSmallest];
+        arr[indexSmallest] = temp;
+    }
+}
+
 int main() {
     Student students[150];
 
@@ -39,6 +57,6 @@ int main() {
 
         fin.close();
     }
-
+    selectionSortById(students, i);
     return 0;
 }
