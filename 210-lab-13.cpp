@@ -56,6 +56,37 @@ int main() {
 
     cout << "sorted result written to output file" << endl;
 
+
+    int minIndex = 0;
+    int maxIndex = 0;
+    double total = 0;
+    double mean;
+
+    for (int j = 0; j < i; j++) {
+        if (students[j].score < students[minIndex].score) {
+            minIndex = j;
+        }
+
+        if (students[j].score > students[maxIndex].score) {
+            maxIndex = j;
+        }
+
+        total = total + students[j].score;
+    }
+
+    mean = total/i;
+
+    cout << endl;
+cout << "Statistics" << endl;
+cout << "----------" << endl;
+
+
+cout << "Minimum: " << students[minIndex].score << " for ID: " << students[minIndex].id << endl;
+
+cout << "Maximum: " << students[maxIndex].score << " for ID: " << students[maxIndex].id << endl;
+
+cout << "Mean: " << mean << endl;
+
     return 0;
 }
 
